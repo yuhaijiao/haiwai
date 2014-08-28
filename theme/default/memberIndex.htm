@@ -1,0 +1,223 @@
+{-include file="header.htm"-}
+<link rel="stylesheet" type="text/css" href="{-$css_path-}common.css"/>
+<link rel="stylesheet" href="{-$css_path-}layout.css" type="text/css">
+<link rel="stylesheet" href="{-$css_path-}index.css" type="text/css">
+ <script type="text/javascript">
+	function logoutWeb(){
+		 top.location.href=root_url+'index/logout.html';
+	}
+</script>
+
+<div class="grid_10 home_box" id="content_box">       
+	<div class="box">
+		<h2>我预订的会议({-$day-})</h2>
+		<div><a href="{-$preDay-}">前一日</a>/<a href="{-$nextDay-}">后一日</a></div>
+		<div class="block" >
+			<table>
+				<tr>
+					<th>会议室</th>
+					<th>时间</th>
+					<th>会议名</th>
+					<th>简介</th>
+					<th>被邀请人</th>
+					<th>需要行政协助</th>
+					<th>行政审核</th>
+				</tr>
+				{-strip-}
+				{-if $myBooks-}
+				{-foreach from=$myBooks item=chenyao -}
+					<tr>
+						<td>{-$chenyao.meetingaddress-}</td>
+						<td>{-$chenyao.meetingstarttime-}-{-$chenyao.meetingendtime-}</td>
+						<td><a href="index.php?module=meeting&action=edit&bookid={-$chenyao.bookid-}" title="编辑此预订信息">{-$chenyao.meetingname-}</a></td>
+						<td title="{-$chenyao.meetingintro-}">{-$chenyao.meetingintro|truncate:100-}</td>
+						<td title="{-$chenyao.inviteeCN-}">({-$chenyao.inviteenum-}人){-$chenyao.inviteeCN|truncate:40-}</td>
+						<td title="{-$chenyao.extralist-}">{-$chenyao.extralist|truncate:100-}</td>
+						<td class="isAgree">{-$chenyao.isagreeCN-}{-if !$chenyao.meetingdebook and $chenyao.isagree eq 0 -}<span id="debook{-$chenyao.bookid-}" val='{-$chenyao.bookid-}'>&nbsp;&nbsp;退订</span>{-elseif $chenyao.meetingdebook eq 1 -}&nbsp;&nbsp;已退订{-elseif $chenyao.isagree eq 1 -}<a href="index.php?module=meeting&action=conference&id={-$chenyao.bookid-}">&nbsp;&nbsp;开始会议纪要</a>{-/if-}</td>
+					</tr>
+				{-/foreach-}
+				{- else -}
+					<tr>
+						<td colspan="7">Sorry啦,你在{-$day-}日还没有预订会议室呢。您可以<a href="index.php?module=meeting&action=edit">预订会议室</a>，也可以<a href="">浏览会议室使用日历</a></td>
+					</tr>
+				{-/if-}{-/strip-}
+			</table>
+		</div>
+	</div>
+
+	<div class="box">
+		<h2>我被邀请的会议({-$day-})</h2>
+		<div><a href="{-$preDay-}">前一日</a>/<a href="{-$nextDay-}">后一日</a></div>
+		<div class="block" >
+			<table>
+				<tr>
+					<th>会议室</th>
+					<th>时间</th>
+					<th>预订人</th>
+					<th>会议名</th>
+					<th>简介</th>
+					<th>被邀请人</th>
+					<th>需要行政协助</th>
+					<th>行政审核</th>
+				</tr>
+				{-strip-}
+				{-if $inviteed-}
+				{-foreach from=$inviteed item=chenyao -}
+					<tr>
+						<td>{-$chenyao.meetingaddress-}</td>
+						<td>{-$chenyao.meetingstarttime-}-{-$chenyao.meetingendtime-}</td>
+						<td>{-$chenyao.bookuser-}</td>
+						<td>{-if ($memberIsadmin or $memberName eq $chenyao.bookuser) -}<a href="index.php?module=meeting&action=edit&bookid={-$chenyao.bookid-}" title="编辑此预订信息">{-$chenyao.meetingname-}</a>{-else-}{-$chenyao.meetingname-}{-/if-}</td>
+						<td title="{-$chenyao.meetingintro-}">{-$chenyao.meetingintro|truncate:100-}</td>
+						<td title="{-$chenyao.inviteeCN-}">({-$chenyao.inviteenum-}人){-$chenyao.inviteeCN|truncate:40-}</td>
+						<td title="{-$chenyao.extralist-}">{-$chenyao.extralist|truncate:100-}</td>
+						<td class="isAgree">{-$chenyao.isagreeCN-}&nbsp;&nbsp;&nbsp;{-if $chenyao.isLeave eq 0 -}<span id="leave{-$chenyao.bookid-}">请假</span>{-else-}已请假{-/if-}</td>
+					</tr>
+				{-/foreach-}
+				{- else -}
+				<tr>
+					<td colspan="7">Sorry啦,你还没有收到在{-$day-}日的会议邀请呢。您可以<a href="index.php?module=meeting&action=edit">预订会议室</a>，也可以<a href="">浏览会议室使用日历</a></td>
+				</tr>
+				{-/if-}{-/strip-}
+			</table>
+		</div>
+	</div>
+	<div>
+		<a href="index.php?module=help&action=rule">{-$ruleTitle-}</a><br/>
+	</div>
+
+	<div id="topcover" ></div>
+	<script type="text/javascript"src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+	<div class="hidden" id="sc_loginreg" style=" left: 506.5px; top: 187.5px; z-index: 99999;">
+		<ul id="sc_lr_tab">
+			<li><a href="#sc_reg" class="curtab">请假</a></li>
+		</ul>
+		<div style="display: block;" class="sc_lr_content hidden" id="sc_reg">
+			<div style="display:none" id="error_reg" class="err_tips_all"></div>
+			<form onsubmit="return false" id="leave" name="leave" method="POST" >
+				<input id="leaveId" type="hidden" value="" name="leaveId">
+				<div style="margin-bottom: 15px;">
+					<p>原因:
+						<input type="text" id="leaveReason" name="leaveReason" class="" required>
+					</p>
+				</div>
+				<p class="fix">
+					<input type="button" id="toClose" value="取消" >
+					<input type="submit" id="regBtn" value="提交">
+				</p>
+			</form>
+		</div>
+	</div>
+<style type="text/css">
+	.hidden {
+	    display: none;
+	}
+	.show {
+	    display: block;
+	}
+	#sc_loginreg {
+	    background: none repeat scroll 0 0 #FFFFFF;
+	    border-radius: 2px;
+	    box-shadow: 0 0 6px #666666;
+	    position: fixed;
+	    width: 410px;
+	}
+	.topcover{
+	    background: none repeat scroll 0 0 #666666;
+	    display: block;
+	    height: 879px;
+	    left: 0;
+	    opacity: 0.5;
+	    position: absolute;
+	    top: 0;
+	    width: 1423px;
+	    z-index: 99998;
+	}
+
+</style>
+
+
+<script type="text/javascript">
+(function($) {
+
+	$(function(){
+		$('#toClose').click(function(){
+			$('#sc_loginreg').attr('class','hidden');
+			$('#topcover').attr('class','');
+		});
+	});
+	
+	$(function(){
+		var a =new Array({-$ids-});
+		$.each(a,function(n,value) {
+			$('#leave'+value).click(function(){
+				// console.log(value);
+				$('#sc_loginreg').attr('class','show');
+				$('#topcover').attr('class','topcover');
+				$('#leaveId').attr('value',value);
+			});
+		});
+	});
+
+	$("#leave").validate({
+			messages: {
+				leaveReason: '请输入请假原因！'
+			},
+			submitHandler: function( form ) {
+				var url='{-$root_url-}'+'{-$RequestUrl-}';
+				leaveCard(url);
+				return false;
+			}
+		});
+	function leaveCard(url){
+		var leaveId = $('#leaveId').val();
+		var leaveReason = $('#leaveReason').val();
+		$.ajax({
+			cache:"false",
+			type:'POST',
+			url:url,
+			data:'bookid='+leaveId+'&leaveReason='+leaveReason,
+			dataType:'json',
+			success:function(data){
+				if(data.error_status == 0){
+					window.location.href = data.forward;
+					return true;
+				}else{
+					alert(data.msg);
+					return false;
+				}
+			}
+		});
+		return false;
+	}
+
+	$(function(){
+		var a =new Array({-$ids-});
+		$.each(a,function(n,value) {
+			$('#debook'+value).click(function(){
+				if(confirm('确认退订吗？')){
+					var _bookId = $('#debook'+value).attr('val');
+					$.ajax({
+						cache:"false",
+						type:'POST',
+						url:'{-$root_url-}'+'{-$RequestUrl-}',
+						data:'bookid='+_bookId,
+						dataType:'json',
+						success:function(data){
+							if(data.error_status == 0){
+								window.location.href = data.forward;
+								return true;
+							}else{
+								alert(data.msg);
+							}
+						}
+					});
+				}
+			});
+		});
+	});	
+
+})(jQuery);
+
+</script>
+{-include file="footer.htm"-}

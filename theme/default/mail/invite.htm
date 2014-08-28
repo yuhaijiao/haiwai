@@ -1,0 +1,33 @@
+<?php
+
+$data = $mailArray['data'];
+$data['meetStartYMDHI'] = date("Y-m-d H:i",$data['meetingstarttime']);
+$data['meetEndHI'] = date("H:i",$data['meetingendtime']);
+$emailLR = <<<HTM
+<div class="content">
+	<div class="top">
+		dear milanoo小伙伴:<br/>
+		你好！<br/><br/>
+	</div>
+	<div class="text">
+		由于 {$data['bookuser']} 在预订的“{$data['meetingname']}”会议邀请人中包括你，为方便你准时参加会议，所以你收到此邮件。会议详细事项如下：<br/><br/>
+		<b>会议发起者</b>：{$data['bookuser']}<br/>
+		<b>会议名</b>：{$data['meetingname']}<br/>
+		<b>会议地址</b>：{$data['meetingaddress']}<br/>
+		<b>会议时间</b>：{$data['meetStartYMDHI']}-{$data['meetEndHI']}<br/>
+		<b>会议简介</b>：{$data['meetingintro']}<br/><br/>
+		如果你不能按时参加，你可以登陆<a href="http://office.milanoo.cc">office.milanoo.cc</a>，对本次会议提出请假申请。<br/>
+		<a href="http://office.milanoo.cc/index.php?module=help&action=rule" target="_blank">米兰网会议管理制度(试行)</a><br/>
+	</div>
+	<div class="bottom">
+		<br/>
+		关于本系统：
+		milanoo meetingBook Systerm是由UED设计并开发的为了规范会议室管理的系统！如有意见和建议请联系UED相关人员，谢谢。<br/><br/>
+
+		本邮件由系统自动发送，请勿回复! 若有会议相关问题，请急时联系会议发起者{$data['bookuser']}。
+	</div>
+</div>
+HTM;
+//邀请测试chenyao
+?>
+

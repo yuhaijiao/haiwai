@@ -1,0 +1,13 @@
+#
+# N: Name
+# E: Email
+# W: Web address
+# P: PGP key ID and fingerprint
+# D: Description
+#
+
+N: Christopher Han (xiphux)
+E: xiphux@gmail.com
+W: http://www.gitphp.org
+W: http://www.xiphux.com
+D: Original implementation and lead developer

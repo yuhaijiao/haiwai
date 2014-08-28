@@ -1,0 +1,55 @@
+- php.ini passthrough check (archive etc won't work if it's disabled)
+- annotate/blame view
+	- git annotate -l -t <filename>
+	- links from
+		- viewblob
+		- tree
+		- commit
+- write "how to contribute patches" and note about git format-patch
+- shortlog: author link does not work from non-master branch
+- $page['refname'] - set when available (branch, tag, or other label)
+	- go through actions and look at parameter names
+- refactor: keep "branch" separate from hash that is being followed/etc
+
+- search: allow global search? [commit|V] [   ] [x]
+- summary tags/heads: show age, not only date
+- summary: cgit-like summary
+	- show ages by default (not dates)
+	- for each branch, show last commit messages & author
+	- use git rev-list --skip
+- allow viewing commit log for a given path?
+	- tree: should link to dir/file log
+	- commitdiff: link to file log
+	- SECURITY: how to validate the path properly before passing it to commandline?
+
+- OPTIMIZE: shortlog viewing, a lot of 'git rev-list' calls, could just use one with --header
+
+- allow extra PATHs to be given, for example for git-issues. Otherwise all
+  extra executables have to be in system PATH.
+- direct links to /path/to/files can't be given out - should be possible to link to HEAD
+- url rewriting?
+- support weird stuff in filenames (\n etc)
+	- use -z for ls-tree
+- commit page: link commit ids to commits
+- commit searching
+	- grep: git grep
+
+	- better result page
+		- date, author, subject, matching commit message/filename/etc if any, action links
+- summary: sort heads by modified date?
+- prefix unvalidated values from browser with 'untrusted_'
+- rewrite the git functions into a reusable class
+- diff between arbitrary trees/commits
+- commitdiff page: filename list has no action links
+- pagenav loses track of which branch/tag we are viewing
+- checkout: generate git-update-server-info information on-the-fly if needed?
+- full log page
+
+= Discarded ideas =
+- simple integrated stats (git shortlog -s -n )?
+	1) statistics are out of scope for the project (feature creep)
+	2) generating them on the fly would place too much strain on the server for large repositories
+	3) there is already gitstats ;)
+- commit support / uploading of bundles to be reviewed
+	- out of scope
+
