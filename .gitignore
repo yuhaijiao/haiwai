@@ -1,0 +1,11 @@
+data/
+config/
+.project
+.settings/
+.git/
+*.swp
+*.log
+*#*#
+/cosplay/theme/default/member_couponpromotion.htm
+/helper/Data.php
+/config
