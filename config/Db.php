@@ -8,12 +8,12 @@ namespace Config;
 class Db {
 	static $mysqlConnection = array(
 				array (
-						'host' => '192.168.11.90',
+						'host' => 'localhost',
 						'port' => '3306',
-						'username' => 'ued',
-						'password' => 'ued',
-						'tablename' => 'milanooOffice',//数据库名
-						'dbprefix' => 'milanoo_',
+						'username' => 'root',
+						'password' => '123456',
+						'tablename' => 'football',//数据库名
+						'dbprefix' => '',
 						'tag' => 'local'
 						),
 				array (

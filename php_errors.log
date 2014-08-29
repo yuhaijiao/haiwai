@@ -19,3 +19,5 @@
 [29-Aug-2014 09:49:57] PHP Notice:  Undefined variable: nextDay in E:\git\yu\module\index\Index.php on line 117
 [29-Aug-2014 09:49:57] PHP Notice:  Undefined variable: memberIsadmin in E:\git\yu\module\index\Index.php on line 118
 [29-Aug-2014 09:49:57] PHP Notice:  Undefined variable: memberName in E:\git\yu\module\index\Index.php on line 119
+[29-Aug-2014 10:04:44] PHP Notice:  Undefined variable: day in E:\git\yu\model\meetingModel.php on line 27
+[29-Aug-2014 10:04:44] PHP Notice:  Undefined variable: nextDay in E:\git\yu\model\meetingModel.php on line 27

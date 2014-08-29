@@ -12,7 +12,8 @@ class Index extends \lib\Application{
 		$tpl = \Lib\Template::getSmarty();
 		$param = \Lib\Helper\RequestUnit::getParams();
 		$meets = new \Model\meetingModel();
-	
+		$result = $meets->getTeam();
+		print_r($result);
 		$tpl->display('index.htm');
 	}
 }
