@@ -21,3 +21,4 @@
 [29-Aug-2014 09:49:57] PHP Notice:  Undefined variable: memberName in E:\git\yu\module\index\Index.php on line 119
 [29-Aug-2014 10:04:44] PHP Notice:  Undefined variable: day in E:\git\yu\model\meetingModel.php on line 27
 [29-Aug-2014 10:04:44] PHP Notice:  Undefined variable: nextDay in E:\git\yu\model\meetingModel.php on line 27
+[29-Aug-2014 11:00:11] PHP Fatal error:  Smarty error: [in index.htm line 17]: syntax error: unrecognized tag: val.name (Smarty_Compiler.class.php, line 447) in E:\git\yu\lib\smarty\Smarty.php on line 1095

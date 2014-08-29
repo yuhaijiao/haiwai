@@ -2,12 +2,23 @@
 <link rel="stylesheet" type="text/css" href="{-$css_path-}common.css"/>
 <link rel="stylesheet" href="{-$css_path-}layout.css" type="text/css">
 <link rel="stylesheet" href="{-$css_path-}index.css" type="text/css">
- <script type="text/javascript">
+<script type="text/javascript">
 	
 </script>
-
-<div class="grid_10 home_box" id="content_box">       
-	
-</div>
-
+<table>
+	<tr>
+		<td>球队名称</td>
+		<td>教练</td>
+		<td>队长</td>
+		<td>积分</td>
+	</tr>
+{-foreach from=$result item=val-}
+	<tr>
+		<td>{-$val.name-}</td>
+		<td>{-$val.coach-}</td>
+		<td>{-$val.leader-}</td>
+		<td>{-$val.points-}</td>
+	</tr>
+{-/foreach-}
+</table>
 {-include file="footer.htm"-}

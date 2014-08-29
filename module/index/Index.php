@@ -13,7 +13,8 @@ class Index extends \lib\Application{
 		$param = \Lib\Helper\RequestUnit::getParams();
 		$meets = new \Model\meetingModel();
 		$result = $meets->getTeam();
-		print_r($result);
+// 		echo'<pre>';print_r($result);
+		$tpl->assign('result',$result);
 		$tpl->display('index.htm');
 	}
 }
