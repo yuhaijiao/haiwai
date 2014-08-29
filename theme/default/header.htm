@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title>milanoo 会议室管理系统</title>
+		<title>milanoo</title>
 		<link rel="stylesheet" type="text/css" href="{-$css_path-}reset.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="{-$css_path-}text.css" media="screen" />
 		<link rel="stylesheet" type="text/css" href="{-$css_path-}grid.css" media="screen" />
@@ -15,14 +15,5 @@
 	<body>
     <div class="container_12">
 		<div class="grid_12 clearfix">
-			<a href="{-$smarty.const.ROOT_URL-}" id="branding">{-$smarty.const.WEB_NAME-}</a> 		
-			<div class="infos">
-				<span>欢迎，<a href="index.php?module=member&action=index" title="进入人个中心">{-$memberName-}</a>同学!&nbsp;&nbsp;&nbsp;</span>
-				<a href="index.php?module=meeting&action=edit">会议室预订</a>	
-				{-if $memberIsadmin-}
-					<a href="index.php?module=meeting&action=index">会议室管理</a>	
-					<a href="index.php?module=system&action=set">系统设置</a>	
-				{-/if-}
-				<a href="index.php?module=index&action=logout">退出登录</a>	
-			</div>	
+					
 		</div>
